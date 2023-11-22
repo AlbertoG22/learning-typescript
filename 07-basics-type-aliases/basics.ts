@@ -31,3 +31,9 @@ userInput = 'Alberto';
 if (typeof userInput === 'string') {
   userName = userInput;
 }
+
+function generateError(msg: string, code: number): never {
+  throw{ message: msg, errorCode: code };
+}
+
+console.log(generateError('An error occurred!', 500));
