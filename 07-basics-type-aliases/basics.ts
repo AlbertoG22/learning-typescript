@@ -1,11 +1,17 @@
 function add(n1: number, n2: number) {
-  console.log(n1.toString() + n2);
+  return n1 + n2;
 }
 
-let number1: number;
-number1 = 5;
-const number2 = 2.8;
-const printResult = true;
-let resultPhrase = 'Result is: ';
+function printResult(num: number): void {
+  console.log('Result: ' + num);
+}
+printResult(add(5, 12));
 
-add(number1, number2);
+let combineValues: (a: number, b: number) => number;
+combineValues = add;
+
+// combineValues = printResult;
+
+console.log(combineValues(8, 8));
+
+
