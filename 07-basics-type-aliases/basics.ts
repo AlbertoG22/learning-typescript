@@ -23,4 +23,11 @@ combineValues = add;
 
 console.log(combineValues(8, 8));
 
+let userInput: unknown;
+let userName: string;
 
+userInput = 5;
+userInput = 'Alberto';
+if (typeof userInput === 'string') {
+  userName = userInput;
+}
