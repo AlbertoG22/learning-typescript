@@ -4,12 +4,12 @@ class Department {
     // private property
     private employees: string[] = [];
 
-    constructor( private readonly id: string, public name: string) {
+    constructor(private readonly id: string, public name: string) {
         // this.id = id;
         // this.name = n;
     }
 
-    describe(this:Department) {
+    describe(this: Department) {
         console.log(`Department: (${this.id}):' ${this.name}`);
     }
 
@@ -23,12 +23,41 @@ class Department {
     }
 }
 
+class ITDepartment extends Department {
+    admins: string[];
+
+    constructor(id: string, admins: string[]) {
+        super(id, 'IT'); // primero debe llamarse el constructor del padre
+        this.admins = admins; // antes de hacer cualquier inicialización
+    }
+}
+
+class AccountingDepartment extends Department {
+    constructor(id: string, private reports: string[]) { // también podemos usar el shorcut
+        super(id, 'Accounting');
+    }
+
+    addReport(text: string) {
+        this.reports.push(text);
+    }
+
+    PrintReports() {
+        console.log(this.reports);
+    }
+}
+
 const accounting = new Department('id_01', 'Accounting');
 accounting.addEmployee('Sergio');
 accounting.addEmployee('Alberto');
 
-// accounting.addEmployee[2] = 'Martha'; // esto ya no es posible al hacer private la propiedad
+const it = new ITDepartment('id_01', ['Beto']);
+it.printEmployeeInformation();
 
+const accounting2 = new AccountingDepartment('id_02', []);
+accounting2.addReport('Something went wrong!');
+accounting2.PrintReports();
+
+// accounting.addEmployee[2] = 'Martha'; // esto ya no es posible al hacer private la propiedad
 accounting.describe();
 accounting.printEmployeeInformation();
 
