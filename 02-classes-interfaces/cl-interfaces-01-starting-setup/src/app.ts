@@ -42,6 +42,13 @@ class AccountingDepartment extends Department {
         throw new Error('No report found.');
     }
 
+    set mostRecentReport(value: string) {
+        if ( !value ) {
+            throw new Error('Please pass in a valid value!');
+        }
+        this.addReport(value);
+    }
+
     constructor(id: string, private reports: string[]) { // también podemos usar el shorcut
         super(id, 'Accounting');
         this.lastReport = reports[0];
@@ -72,6 +79,7 @@ const it = new ITDepartment('id_01', ['Beto']);
 it.printEmployeeInformation();
 
 const accounting2 = new AccountingDepartment('id_02', []);
+accounting2.mostRecentReport = 'Final Report!';
 accounting2.addReport('Something went wrong!');
 console.log(accounting2.mostRecentReport); // se accede como si propiedad, no como método
 accounting2.addEmployee('Alberto');
