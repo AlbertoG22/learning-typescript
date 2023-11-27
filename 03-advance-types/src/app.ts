@@ -102,7 +102,18 @@ function moveAnimal(animal: Animal) {
 moveAnimal({ type: 'bird', flyingSpeed: 10 });
 
 // const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
-
 const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
 
 userInputElement.value = 'Hi there!';
+
+interface ErrorContainer {
+  id: string;
+  // code: number; // not possible
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email',
+  age: 24,
+  1: 'algo', // el 1 es interpretado como string
+}
