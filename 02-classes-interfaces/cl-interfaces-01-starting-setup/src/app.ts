@@ -1,5 +1,5 @@
 interface Greetable {
-    name: string;
+    readonly name: string;
 
     greet(phrase: string): void;
 }
@@ -17,12 +17,9 @@ class Person implements Greetable {
     }
 }
 
-let user1: Person;
-user1 = {
-    name: 'Beto',
-    age: 24,
-    greet(phrase: string) {
-        console.log(phrase + ' ' + this.name);
-    }
-};
+let user1: Greetable;
+user1 = new Person('Beto');
+// user1.name = 'Alberto'; // no es posible por "read-only property"
+
 user1.greet('Hi there, I am');
+console.log(user1);
