@@ -10,27 +10,36 @@ add = (n1: number, n2: number) => {
 };
 
 interface Named {
-    readonly name: string;
+    readonly name?: string;
+    output?: string; // propery opcional
 }
 
 interface Greetable extends Named {
     greet(phrase: string): void;
+    // greet?(phrase: string): void; // método opcional
 }
 
 class Person implements Greetable {
-    name: string;
+    name?: string;
     age = 30
     
-    constructor(n: string) {
-        this.name = n;
+    constructor(n?: string) { // argumento opcional
+        if (n) {
+            this.name = n;
+        }
     }
 
     greet(phrase: string) {
-        console.log(phrase + ' ' + this.name);
+        if (this.name) {
+            console.log(phrase + ' ' + this.name);
+        } else {
+            console.log('Hi!');
+        }
     }
 }
 
 let user1: Greetable;
+// user1 = new Person();
 user1 = new Person('Beto');
 // user1.name = 'Alberto'; // no es posible por "read-only property"
 
