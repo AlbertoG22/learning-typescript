@@ -70,3 +70,17 @@ textStorage.addItem('Beto');
 const numberStorage = new DataStorage<number>();
 numberStorage.addItem(25); // is possible now
 
+// ---------------------------- Partial ----------------------------
+interface CourseGoal {
+    title: string;
+    description: string;
+    completeUntil: Date;
+}
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+    let courseGoal: Partial<CourseGoal> = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal as CourseGoal;
+}
