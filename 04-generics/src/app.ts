@@ -84,3 +84,7 @@ function createCourseGoal(title: string, description: string, date: Date): Cours
     courseGoal.completeUntil = date;
     return courseGoal as CourseGoal;
 }
+
+// ---------------------------- Readonly ----------------------------
+const names: Readonly<string[]> = ['Sergio', 'Alberto'];
+// name.push('Anna'); // not allowed
