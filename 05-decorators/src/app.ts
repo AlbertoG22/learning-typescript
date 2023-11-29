@@ -51,6 +51,13 @@ function Log3(target: any, name: string | symbol, descriptor: PropertyDescriptor
     console.log(descriptor);
 }
 
+function Log4(target: any, name: string | symbol, position: number) {
+    console.log('Property decorator!');
+    console.log(target);
+    console.log(name);
+    console.log(position);
+}
+
 class Product {
     @Log
     title: string;
@@ -70,7 +77,7 @@ class Product {
     }
 
     @Log3
-    getPriceWithTax(tax: number) {
+    getPriceWithTax(@Log4 tax: number) {
         return this._price * (1 + tax);
     }
 }
