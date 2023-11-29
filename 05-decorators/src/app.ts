@@ -8,12 +8,18 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
     console.log('TEMPLATE FACTORY');
-    return function(constructor: any) {
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor(); // usar los valores de la clase dentro de la decorator function
-        if(hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector('h1')!.textContent = p.name;
+    return function<T extends {new(...args: any[]): {name: string}}>(originalConstructor: T) {
+        // remplazar el constructor original con uno nuevo con lógica nueva, sin perder la info del original
+        return class extends originalConstructor { 
+            constructor(..._: any[]) {
+                super();
+                const hookEl = document.getElementById(hookId);
+                if(hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector('h1')!.textContent = this.name;
+                }
+
+            }
         }
     }
 }
