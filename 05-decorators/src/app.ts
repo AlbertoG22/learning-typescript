@@ -87,3 +87,30 @@ class Product {
         return this._price * (1 + tax);
     }
 }
+const p1 = new Product('Book', 19);
+
+function autoBind(_: any, _2: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    const adjDescriptor: PropertyDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this); // este this referirá siempre al objeto en donde se defina el getter
+            return boundFn;
+        }
+    };
+    return adjDescriptor;
+}
+
+class Printer {
+    message = 'This works!';
+
+    @autoBind
+    showMessage() {
+        console.log(this.message);
+    }
+}
+
+const p = new Printer();
+const button = document.querySelector('button')!;
+button.addEventListener('click', p.showMessage);
